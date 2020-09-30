@@ -16,7 +16,7 @@ export default {
   },
   actions: {
     getTasks({ commit, rootState }) {
-      fetch("http://192.168.30.100:8000", {
+      fetch(process.env.VUE_APP_API_HOST, {
         headers: {
           Authorization: `Bearer ${rootState.user.keycloak.token}`
         }
@@ -27,30 +27,30 @@ export default {
         });
     },
     toggleTask({ dispatch, rootState }, task_id) {
-      fetch(`http://192.168.30.100:8000/${task_id}`, {
-        method: "PUT",
+      fetch(`${process.env.VUE_APP_API_HOST}/${task_id}`, {
+        method: 'PUT',
         headers: {
-          Authorization: `Bearer ${rootState.user.keycloak.token}`
-        }
+          Authorization: `Bearer ${rootState.user.keycloak.token}`,
+        },
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data == "OK") {
-            dispatch("getTasks");
+        .then((response) => response.json())
+        .then((data) => {
+          if (data == 'OK') {
+            dispatch('getTasks');
           }
         });
     },
     deleteTask({ dispatch, rootState }, task_id) {
-      fetch(`http://192.168.30.100:8000/${task_id}`, {
-        method: "DELETE",
+      fetch(`${process.env.VUE_APP_API_HOST}/${task_id}`, {
+        method: 'DELETE',
         headers: {
-          Authorization: `Bearer ${rootState.user.keycloak.token}`
-        }
+          Authorization: `Bearer ${rootState.user.keycloak.token}`,
+        },
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data == "OK") {
-            dispatch("getTasks");
+        .then((response) => response.json())
+        .then((data) => {
+          if (data == 'OK') {
+            dispatch('getTasks');
           }
         });
     },
@@ -59,17 +59,17 @@ export default {
         task,
         complete: 0
       };
-      fetch("http://192.168.30.100:8000", {
-        method: "POST",
+      fetch(`${process.env.VUE_APP_API_HOST}`, {
+        method: 'POST',
         body: JSON.stringify(taskToAdd),
         headers: {
-          Authorization: `Bearer ${rootState.user.keycloak.token}`
-        }
+          Authorization: `Bearer ${rootState.user.keycloak.token}`,
+        },
       })
-        .then(response => response.json())
-        .then(data => {
-          if (data == "OK") {
-            dispatch("getTasks");
+        .then((response) => response.json())
+        .then((data) => {
+          if (data == 'OK') {
+            dispatch('getTasks');
           }
         });
     }

@@ -40,7 +40,6 @@ export default {
     setKeycloak(state, keycloak) {
       state.keycloak = keycloak;
       if (keycloak.authenticated) {
-        console.log("keycloak is authenticated");
         state.user.username = keycloak.tokenParsed.preferred_username;
         state.user.token = keycloak.token;
         state.user.email = keycloak.tokenParsed.email;

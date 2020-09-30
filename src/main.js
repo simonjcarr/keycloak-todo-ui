@@ -8,9 +8,9 @@ import Keycloak from "keycloak-js";
 Vue.config.productionTip = false;
 
 let initOptions = {
-  url: "http://192.168.10.3:8080/auth",
-  realm: "Development",
-  clientId: "ToDo-FrontEnd"
+  url: `${process.env.VUE_APP_KEYCLOAK_HOST}/auth`,
+  realm: 'Development',
+  clientId: 'ToDo-FrontEnd',
 };
 let keycloak = Keycloak(initOptions);
 keycloak
